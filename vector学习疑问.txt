@@ -1,0 +1,10 @@
+1:size_type max_size() const { return size_type(-1) / sizeof(T); } 
+size_type是无符号数, 
+一般定义：typedef unsigned long int size_type
+将－1转换成无符号数就是最大整数
+
+2: std::string::operator[]
+      char& operator[] (size_t pos);
+const char& operator[] (size_t pos) const;
+Get character of string
+Returns a reference to the character at position pos in the string.
