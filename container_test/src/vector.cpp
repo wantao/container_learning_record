@@ -1,9 +1,13 @@
 // constructing vectors
+
+//vs2005不支持c++11 cbegin,cend,crbegin,crend,data,emplace,emplace_back,shrink_to_fit
 #include <iostream>
 #include <vector>
 #include "../include/vector.h"
 
 using namespace std;
+
+
 
 class VectorUseSample g_VectorTest;
 VectorUseSample::VectorUseSample()
@@ -148,29 +152,31 @@ void VectorUseSample::vector_capacity_sample()
 //Returns a const_iterator pointing to the first element in the container.
 void VectorUseSample::vector_cbegin_sample()
 {
+	/*int tmp[] = {10,20,30,40,50};
 
-	std::vector<int> myvector = {10,20,30,40,50};
+	std::vector<int> myvector(tmp, tmp + sizeof(tmp) / sizeof(int) );
 
 	std::cout << "myvector contains:";
-
-	for (auto it = myvector.cbegin(); it != myvector.cend(); ++it)
+	vector<int>::const_iterator it = myvector.cbegin();
+	for ( ; it != myvector.cend(); ++it)
 		std::cout << ' ' << *it;
-	std::cout << '\n';
+	std::cout << '\n';*/
 	//output
 	//myvector contains: 10 20 30 40 50
 }
 
 //Returns a const_iterator pointing to the past-the-end element in the container.
+//vs2005不支持c++11 cbegin,cend
 void VectorUseSample::vector_cend_sample()
 {
 
-	std::vector<int> myvector = {10,20,30,40,50};
+	/*std::vector<int> myvector = {10,20,30,40,50};
 
 	std::cout << "myvector contains:";
 
 	for (auto it = myvector.cbegin(); it != myvector.cend(); ++it)
 		std::cout << ' ' << *it;
-	std::cout << '\n';
+	std::cout << '\n';*/
 	//output
 	//myvector contains: 10 20 30 40 50
 }
@@ -204,12 +210,13 @@ void VectorUseSample::vector_clear_sample()
 //Returns a const_reverse_iterator pointing to the last element in the container (i.e., its reverse beginning)
 void VectorUseSample::vector_crbegin_sample()
 {
-	std::vector<int> myvector = {1,2,3,4,5};
+	/*int tmp[] = {1,2,3,4,5};
+	std::vector<int> myvector(tmp,tmp+sizeof(tmp)/sizeof(int));
 
 	std::cout << "myvector backwards:";
 	for (auto rit = myvector.crbegin(); rit != myvector.crend(); ++rit)
 		std::cout << ' ' << *rit;
-	std::cout << '\n';
+	std::cout << '\n';*/
 
 	//output
 	//myvector backwards: 5 4 3 2 1
@@ -221,12 +228,13 @@ void VectorUseSample::vector_crbegin_sample()
 void VectorUseSample::vector_crend_sample()
 {
 
-	std::vector<int> myvector = {1,2,3,4,5};
+	/*int tmp[] = {1,2,3,4,5};
+	std::vector<int> myvector(tmp,tmp+sizeof(tmp)/sizeof(int));
 
 	std::cout << "myvector backwards:";
 	for (auto rit = myvector.crbegin(); rit != myvector.crend(); ++rit)
 		std::cout << ' ' << *rit;
-	std::cout << '\n';
+	std::cout << '\n';*/
 	//output
 	//myvector backwards: 5 4 3 2 1
 }
@@ -237,7 +245,7 @@ void VectorUseSample::vector_crend_sample()
 //the pointer retrieved can be offset to access any element in the array.
 void VectorUseSample::vector_data_sample()
 {
-	std::vector<int> myvector (5);
+	/*std::vector<int> myvector (5);
 
 	int* p = myvector.data();
 
@@ -249,7 +257,7 @@ void VectorUseSample::vector_data_sample()
 	std::cout << "myvector contains:";
 	for (unsigned i=0; i<myvector.size(); ++i)
 		std::cout << ' ' << myvector[i];
-	std::cout << '\n';
+	std::cout << '\n';*/
 	//output
 	//myvector contains: 10 20 0 100 0
 }
@@ -259,7 +267,7 @@ void VectorUseSample::vector_data_sample()
 //This new element is constructed in place using args as the arguments for its construction.
 void VectorUseSample::vector_emplace_sample()
 {
-	std::vector<int> myvector = {10,20,30};
+	/*std::vector<int> myvector = {10,20,30};
 
 	auto it = myvector.emplace ( myvector.begin()+1, 100 );
 	myvector.emplace ( it, 200 );
@@ -268,7 +276,7 @@ void VectorUseSample::vector_emplace_sample()
 	std::cout << "myvector contains:";
 	for (auto& x: myvector)
 		std::cout << ' ' << x;
-	std::cout << '\n';
+	std::cout << '\n';*/
 	//output
 	//myvector contains: 10 200 100 20 30 300
 
@@ -279,7 +287,7 @@ void VectorUseSample::vector_emplace_sample()
 //This new element is constructed in place using args as the arguments for its constructor.
 void VectorUseSample::vector_emplace_back_sample()
 {
-	std::vector<int> myvector = {10,20,30};
+	/*std::vector<int> myvector = {10,20,30};
 
 	myvector.emplace_back (100);
 	myvector.emplace_back (200);
@@ -287,7 +295,7 @@ void VectorUseSample::vector_emplace_back_sample()
 	std::cout << "myvector contains:";
 	for (auto& x: myvector)
 		std::cout << ' ' << x;
-	std::cout << '\n';
+	std::cout << '\n';*/
 	//output
 	//myvector contains: 10 20 30 100 200
 }
@@ -509,7 +517,7 @@ void VectorUseSample::vector_pop_back_sample()
 		myvector.pop_back();
 	}
 
-	std::cout << "The elements of myvector add up to " << sum << '\n';
+	std::cout << "The elements of myvector add up to " << sum <<"capacity:"<<myvector.capacity()<< '\n';
 
 	//output
 	//The elements of myvector add up to 600
@@ -650,14 +658,14 @@ void VectorUseSample::vector_resize_sample()
 //otherwise and leave the vector with a capacity greater than its size
 void VectorUseSample::vector_shrink_to_fit_sample()
 {
-	std::vector<int> myvector (100);
+	/*std::vector<int> myvector (100);
 	std::cout << "1. capacity of myvector: " << myvector.capacity() << '\n';
 
 	myvector.resize(10);
 	std::cout << "2. capacity of myvector: " << myvector.capacity() << '\n';
 
 	myvector.shrink_to_fit();
-	std::cout << "3. capacity of myvector: " << myvector.capacity() << '\n';
+	std::cout << "3. capacity of myvector: " << myvector.capacity() << '\n';*/
 	//output
 	//Possible output:
 	//1. capacity of myvector: 100
@@ -772,11 +780,11 @@ void VectorUseSample::init()
 	vector_crbegin_sample();
 	vector_crend_sample();
 	vector_data_sample();
-	vector_emplace_sample()
+	vector_emplace_sample();
 	vector_emplace_back_sample();
-	vector_empty_sample()
+	vector_empty_sample();
 	vector_end_sample();
-	vector_erase_sample()
+	vector_erase_sample();
 	vector_front_sample();
 	vector_get_allocator_sample();
 	vector_insert_sample();
